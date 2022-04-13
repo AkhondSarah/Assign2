@@ -1,0 +1,75 @@
+﻿@model Lab4N.Models.ViewModels.BrokeragesViewModel
+
+@{
+    ViewData["Title"] = "EditSubscriptions";
+   
+}
+<style>
+
+
+   
+</style>
+<h1>Edit</h1>
+
+<h4>Clients</h4>
+<hr />
+
+    
+    <form asp-action="EditSubscriptions">
+
+
+        <table class="row">
+           
+                <tr>
+                    <th>
+                        Full Name &nbsp;
+                    </th>
+                    <td>
+                        @Model.Clients.First().FullName
+                    </td>
+                    
+                </tr>
+               
+        </table>
+           
+        <hr />
+
+            <table class="row">
+
+                @foreach (var item in Model.Brokerages)
+                {
+
+                    bool addCom = Model.Subscriptions.Where(i => i.BrokerageId == item.Id).Count() > 0;
+
+                    if (!addCom)
+                    {
+                        <tr>
+                            <td>@item.Title </td>
+                            <td> <a asp-action="AddSubscriptions" asp-route-ClientId="@Model.Clients.First().Id" asp-route-BrokerageId="@item.Id">&nbsp;Register</a></td>
+                        </tr>
+                    }
+
+                    else
+                    {
+                        <tr>
+                            <td>
+                                @item.Title
+                            </td>
+                            <td>
+                                <a asp-action="RemoveSubscriptions" asp-route-ClientId="@Model.Clients.First().Id" asp-route-BrokerageId="@item.Id">&nbsp;Unregister</a>
+                            </td>
+                        </tr>
+                    }
+
+                }
+
+            </table>
+    </form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

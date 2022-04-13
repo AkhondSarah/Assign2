@@ -1,0 +1,41 @@
+﻿@model Lab4N.Models.Brokerage
+
+@{
+    ViewData["Title"] = "Create";
+}
+<style>
+
+
+    h1 {
+        font-family: "Times New Roman";
+        letter-spacing: 5px;
+    }
+</style>
+<h1>Show ads for Brokerage @Model.Title</h1>
+
+<h4>Upload a Picture </h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Upload" enctype="multipart/form-data">
+            <div class="form-group">
+                <div class="btn btn-sm float-left">
+                    <input name="BrokerageId" type="hidden" value="@Model.Id">
+                    <input name="file" type="file">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button name="upload" class="btn btn-primary">Upload Now</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" asp-route-id="@Model.Id">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
