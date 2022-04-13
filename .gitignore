@@ -1,0 +1,6 @@
+.vs
+*/bin
+*/.config
+*/obj
+*/appsettings.json
+*/appsettings.Development.json
